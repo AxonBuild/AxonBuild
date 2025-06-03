@@ -509,6 +509,7 @@
   <h2 id="table-of-contents">Table of Contents</h2>
   <ul>
     <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#tech-stack">Tech Stack</a></li>
     <li><a href="#code-style-and-formatting">Code Style and
         Formatting</a></li>
     <li><a href="#naming-conventions">Naming Conventions</a></li>
@@ -540,6 +541,39 @@
       and fixing issues faster</li>
     <li><strong>Performance</strong>: Quality code often performs better and
       uses resources efficiently</li>
+  </ul>
+  <h2 id="tech-stack">Tech Stack</h2>
+  <p>Our development team uses the following technologies and frameworks. Understanding our tech stack helps ensure consistent implementation and best practices across all projects.</p>
+  
+  <h3 id="frontend-frameworks">Frontend Frameworks</h3>
+  <ul>
+    <li><strong>React</strong>: Component-based UI library for building user interfaces</li>
+    <li><strong>Next.js</strong>: Full-stack React framework with server-side rendering and routing</li>
+    <li><strong>Tailwind CSS</strong>: Utility-first CSS framework for rapid UI development</li>
+  </ul>
+
+  <h3 id="backend-frameworks">Backend Frameworks</h3>
+  <ul>
+    <li><strong>Node.js</strong>: JavaScript runtime for server-side development</li>
+    <li><strong>Express.js</strong>: Minimalist web framework for Node.js applications</li>
+    <li><strong>FastAPI</strong>: Modern Python web framework for building APIs</li>
+  </ul>
+
+  <h3 id="ai-and-audio-services">AI and Audio Services</h3>
+  <ul>
+    <li><strong>OpenAI SDK</strong>: Integration with OpenAI's AI models and services</li>
+    <li><strong>OpenRouter SDK</strong>: Multi-provider AI model routing and access</li>
+    <li><strong>Whisper</strong>: Speech-to-text transcription service</li>
+    <li><strong>ElevenLabs</strong>: Text-to-speech synthesis and voice generation</li>
+  </ul>
+
+  <h3 id="development-guidelines">Development Guidelines</h3>
+  <ul>
+    <li>Follow framework-specific best practices and conventions</li>
+    <li>Use TypeScript with React and Next.js projects for better type safety</li>
+    <li>Implement proper error handling for AI service integrations</li>
+    <li>Use environment variables for API keys and sensitive configuration</li>
+    <li>Follow responsive design principles with Tailwind CSS</li>
   </ul>
   <h2 id="code-style-and-formatting">Code Style and Formatting</h2>
   <h3 id="general-principles">General Principles</h3>
@@ -671,64 +705,6 @@
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
   </div>
   <h2 id="code-duplication">Code Duplication</h2>
-  <h3 id="avoid-repeating-complex-objects-and-logic">Avoid Repeating
-    Complex Objects and Logic</h3>
-  <ul>
-    <li>Store complex nested objects in variables</li>
-    <li>Extract repeated logic into reusable functions</li>
-    <li>Use the DRY (Don’t Repeat Yourself) principle</li>
-  </ul>
-  <div class="sourceCode" id="cb6">
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">processUserNotifications</span>(users) {</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> notificationSettings <span class="op">=</span> {</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">email</span><span class="op">:</span> {</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">enabled</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">frequency</span><span class="op">:</span> <span class="st">&#39;daily&#39;</span><span class="op">,</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">types</span><span class="op">:</span> [<span class="st">&#39;security&#39;</span><span class="op">,</span> <span class="st">&#39;updates&#39;</span><span class="op">,</span> <span class="st">&#39;promotions&#39;</span>]</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sms</span><span class="op">:</span> {</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">enabled</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">frequency</span><span class="op">:</span> <span class="st">&#39;immediate&#39;</span><span class="op">,</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">types</span><span class="op">:</span> [<span class="st">&#39;security&#39;</span>]</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">push</span><span class="op">:</span> {</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">enabled</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">frequency</span><span class="op">:</span> <span class="st">&#39;immediate&#39;</span><span class="op">,</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">types</span><span class="op">:</span> [<span class="st">&#39;security&#39;</span><span class="op">,</span> <span class="st">&#39;updates&#39;</span>]</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> users<span class="op">.</span><span class="fu">map</span>(user <span class="kw">=&gt;</span> ({</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>user<span class="op">,</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">notifications</span><span class="op">:</span> notificationSettings</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  }))<span class="op">;</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">// ❌ Bad</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">processUserNotifications</span>(users) {</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> users<span class="op">.</span><span class="fu">map</span>(user <span class="kw">=&gt;</span> ({</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>user<span class="op">,</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="dt">notifications</span><span class="op">:</span> {</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>      <span class="dt">email</span><span class="op">:</span> {</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="dt">enabled</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="dt">frequency</span><span class="op">:</span> <span class="st">&#39;daily&#39;</span><span class="op">,</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="dt">types</span><span class="op">:</span> [<span class="st">&#39;security&#39;</span><span class="op">,</span> <span class="st">&#39;updates&#39;</span><span class="op">,</span> <span class="st">&#39;promotions&#39;</span>]</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>      <span class="dt">sms</span><span class="op">:</span> {</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>        <span class="dt">enabled</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>        <span class="dt">frequency</span><span class="op">:</span> <span class="st">&#39;immediate&#39;</span><span class="op">,</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>        <span class="dt">types</span><span class="op">:</span> [<span class="st">&#39;security&#39;</span>]</span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>      <span class="dt">push</span><span class="op">:</span> {</span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>        <span class="dt">enabled</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>        <span class="dt">frequency</span><span class="op">:</span> <span class="st">&#39;immediate&#39;</span><span class="op">,</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>        <span class="dt">types</span><span class="op">:</span> [<span class="st">&#39;security&#39;</span><span class="op">,</span> <span class="st">&#39;updates&#39;</span>]</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  }))<span class="op">;</span></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
-  </div>
   <h3 id="extract-repeated-logic">Extract Repeated Logic</h3>
   <div class="sourceCode" id="cb7">
     <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
@@ -770,6 +746,29 @@
 <span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
 <span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
   </div>
+  <h3 id="avoid-repeated-nested-object-access">Avoid Repeated Nested Object Access</h3>
+  <div class="sourceCode" id="cb8">
+    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">displayUserInfo</span>(chat) {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> firstName <span class="op">=</span> chat<span class="op">.</span><span class="at">session</span><span class="op">.</span><span class="at">user</span><span class="op">.</span><span class="at">firstname</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> lastName <span class="op">=</span> chat<span class="op">.</span><span class="at">session</span><span class="op">.</span><span class="at">user</span><span class="op">.</span><span class="at">lastname</span><span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> email <span class="op">=</span> chat<span class="op">.</span><span class="at">session</span><span class="op">.</span><span class="at">user</span><span class="op">.</span><span class="at">email</span><span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="vs">`Welcome </span><span class="sc">${</span>firstName<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>lastName<span class="sc">}</span><span class="vs">! Your email is </span><span class="sc">${</span>email<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Even better - destructuring</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">displayUserInfo</span>(chat) {</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> { firstname<span class="op">,</span> lastname<span class="op">,</span> email } <span class="op">=</span> chat<span class="op">.</span><span class="at">session</span><span class="op">.</span><span class="at">user</span><span class="op">;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="vs">`Welcome </span><span class="sc">${</span>firstname<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>lastname<span class="sc">}</span><span class="vs">! Your email is </span><span class="sc">${</span>email<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">// ❌ Bad - repeated nested access</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">displayUserInfo</span>(chat) {</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="vs">`Welcome </span><span class="sc">${</span>chat<span class="op">.</span><span class="at">session</span><span class="op">.</span><span class="at">user</span><span class="op">.</span><span class="at">firstname</span><span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>chat<span class="op">.</span><span class="at">session</span><span class="op">.</span><span class="at">user</span><span class="op">.</span><span class="at">lastname</span><span class="sc">}</span><span class="vs">! Your email is </span><span class="sc">${</span>chat<span class="op">.</span><span class="at">session</span><span class="op">.</span><span class="at">user</span><span class="op">.</span><span class="at">email</span><span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
+  </div>
   <h2 id="constants-and-configuration">Constants and Configuration</h2>
   <h3 id="use-constants-instead-of-hardcoded-values">Use Constants Instead
     of Hardcoded Values</h3>
@@ -778,27 +777,27 @@
     <li>Use configuration files for environment-specific values</li>
     <li>Make code more maintainable and less error-prone</li>
   </ul>
-  <div class="sourceCode" id="cb8">
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> PAGINATION <span class="op">=</span> {</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">DEFAULT_PAGE_SIZE</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">MAX_PAGE_SIZE</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">MIN_PAGE_SIZE</span><span class="op">:</span> <span class="dv">5</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> USER_ROLES <span class="op">=</span> {</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ADMIN</span><span class="op">:</span> <span class="st">&#39;admin&#39;</span><span class="op">,</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">MODERATOR</span><span class="op">:</span> <span class="st">&#39;moderator&#39;</span><span class="op">,</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">USER</span><span class="op">:</span> <span class="st">&#39;user&#39;</span><span class="op">,</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">GUEST</span><span class="op">:</span> <span class="st">&#39;guest&#39;</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> API_ENDPOINTS <span class="op">=</span> {</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">USERS</span><span class="op">:</span> <span class="st">&#39;/api/v1/users&#39;</span><span class="op">,</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ORDERS</span><span class="op">:</span> <span class="st">&#39;/api/v1/orders&#39;</span><span class="op">,</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">PRODUCTS</span><span class="op">:</span> <span class="st">&#39;/api/v1/products&#39;</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+  <div class="sourceCode" id="cb9">
+    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> PAGINATION <span class="op">=</span> {</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">DEFAULT_PAGE_SIZE</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">MAX_PAGE_SIZE</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">MIN_PAGE_SIZE</span><span class="op">:</span> <span class="dv">5</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> USER_ROLES <span class="op">=</span> {</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ADMIN</span><span class="op">:</span> <span class="st">&#39;admin&#39;</span><span class="op">,</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">MODERATOR</span><span class="op">:</span> <span class="st">&#39;moderator&#39;</span><span class="op">,</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">USER</span><span class="op">:</span> <span class="st">&#39;user&#39;</span><span class="op">,</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">GUEST</span><span class="op">:</span> <span class="st">&#39;guest&#39;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> API_ENDPOINTS <span class="op">=</span> {</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">USERS</span><span class="op">:</span> <span class="st">&#39;/api/v1/users&#39;</span><span class="op">,</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ORDERS</span><span class="op">:</span> <span class="st">&#39;/api/v1/orders&#39;</span><span class="op">,</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">PRODUCTS</span><span class="op">:</span> <span class="st">&#39;/api/v1/products&#39;</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getUsersPaginated</span>(page <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> pageSize <span class="op">=</span> PAGINATION<span class="op">.</span><span class="at">DEFAULT_PAGE_SIZE</span>) {</span>
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (pageSize <span class="op">&gt;</span> PAGINATION<span class="op">.</span><span class="at">MAX_PAGE_SIZE</span>) {</span>
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    pageSize <span class="op">=</span> PAGINATION<span class="op">.</span><span class="at">MAX_PAGE_SIZE</span><span class="op">;</span></span>
