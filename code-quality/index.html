@@ -372,6 +372,65 @@
       background-color: #f8fafc;
     }
 
+    .company-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2em;
+      margin-bottom: 3em;
+      padding: 2em;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #2d3748;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .company-logo {
+      flex-shrink: 0;
+    }
+
+    .company-logo .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid rgba(45, 55, 72, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .company-info {
+      text-align: left;
+    }
+
+    .company-name {
+      margin: 0;
+      font-size: 2.5em;
+      font-weight: 700;
+      color: #2d3748;
+      text-shadow: none;
+    }
+
+    @media (max-width: 768px) {
+      .company-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5em;
+        padding: 1.5em;
+      }
+
+      .company-info {
+        text-align: center;
+      }
+
+      .company-name {
+        font-size: 2em;
+      }
+
+      .company-logo .logo {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
     header {
       margin-bottom: 5em;
       text-align: center;
@@ -796,6 +855,15 @@
 
 <body>
   <div class="content-wrapper">
+    <header class="company-header">
+      <div class="company-logo">
+        <img src="/logo.png" alt="AxonBuild Logo" class="logo">
+      </div>
+      <div class="company-info">
+        <h1 class="company-name">AxonBuild</h1>
+      </div>
+    </header>
+    
     <h1 id="technical-guidance">Technical Guidance</h1>
     <h2 id="table-of-contents">Table of Contents</h2>
     <ul>
