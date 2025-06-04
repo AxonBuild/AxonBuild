@@ -491,7 +491,7 @@
 
     ul.task-list li {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 0.75em;
       margin: 0.8em 0;
       padding: 0.6em;
@@ -506,16 +506,40 @@
       border-left-color: #3b82f6;
     }
 
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 1.1em;
-      height: 1.1em;
-      margin: 0;
-      vertical-align: top;
-      accent-color: #3b82f6;
+    ul.task-list li .custom-checkbox {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #d1d5db;
+      border-radius: 3px;
+      background-color: #ffffff;
+      flex-shrink: 0;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    ul.task-list li label {
+    ul.task-list li .custom-checkbox:hover {
+      border-color: #3b82f6;
+      background-color: #f8fafc;
+    }
+
+    ul.task-list li .custom-checkbox.checked {
+      background-color: #3b82f6;
+      border-color: #3b82f6;
+    }
+
+    ul.task-list li .custom-checkbox.checked::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    ul.task-list li .task-text {
       flex: 1;
       cursor: pointer;
       color: #374151;
@@ -1319,14 +1343,14 @@
     </ul>
     <h4 id="before-creating-a-pr">Before Creating a PR</h4>
     <ul class="task-list">
-      <li><label><input type="checkbox" />Code follows style
-          guidelines</label></li>
-      <li><label><input type="checkbox" />All tests pass</label></li>
-      <li><label><input type="checkbox" />Documentation updated if
-          needed</label></li>
-      <li><label><input type="checkbox" />No debugging code left
-          behind</label></li>
-      <li><label><input type="checkbox" />Self-review completed</label></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">Code follows style
+          guidelines</span></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">All tests pass</span></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">Documentation updated if
+          needed</span></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">No debugging code left
+          behind</span></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">Self-review completed</span></li>
     </ul>
     <h2 id="code-journey-logging">Code Journey Logging</h2>
     <h3 id="document-important-decisions-and-changes">Document Important
@@ -1416,21 +1440,21 @@
     </ol>
     <h3 id="review-checklist">Review Checklist</h3>
     <ul class="task-list">
-      <li><label><input type="checkbox" />Code follows naming
-          conventions</label></li>
-      <li><label><input type="checkbox" />No hardcoded values (uses constants
-          instead)</label></li>
-      <li><label><input type="checkbox" />Error handling is
-          appropriate</label></li>
-      <li><label><input type="checkbox" />Security best practices are
-          followed</label></li>
-      <li><label><input type="checkbox" />No code duplication</label></li>
-      <li><label><input type="checkbox" />Documentation is
-          updated</label></li>
-      <li><label><input type="checkbox" />No debugging code or console.logs
-          left in</label></li>
-      <li><label><input type="checkbox" />Performance implications
-          considered</label></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">Code follows naming
+          conventions</span></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">No hardcoded values (uses constants
+          instead)</span></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">Error handling is
+          appropriate</span></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">Security best practices are
+          followed</span></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">No code duplication</span></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">Documentation is
+          updated</span></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">No debugging code or console.logs
+          left in</span></li>
+      <li><div class="custom-checkbox" onclick="toggleCheckbox(this)"></div><span class="task-text">Performance implications
+          considered</span></li>
     </ul>
     <h2 id="conclusion">Conclusion</h2>
     <p>Following these code quality guidelines will help our team: - Produce
@@ -1445,6 +1469,12 @@
       to us.</p>
     <p><em>Last updated: June 3, 2025</em></p>
   </div> <!-- content-wrapper -->
+
+  <script>
+    function toggleCheckbox(element) {
+      element.classList.toggle('checked');
+    }
+  </script>
 </body>
 
 </html>
