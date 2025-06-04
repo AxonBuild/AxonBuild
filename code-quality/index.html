@@ -5,34 +5,100 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>codequality</title>
+  <title>Technical Guidance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <style>
     html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
+      color: #1f2937;
+      background-color: #ffffff;
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
+      max-width: 45em;
+      padding-left: 2.5em;
+      padding-right: 2.5em;
+      padding-top: 3em;
+      padding-bottom: 4em;
       hyphens: auto;
       overflow-wrap: break-word;
       text-rendering: optimizeLegibility;
       font-kerning: normal;
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+      font-size: 1.125em;
+      line-height: 1.75;
+      letter-spacing: -0.01em;
+      /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+      min-height: 100vh;
     }
 
-    @media (max-width: 600px) {
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #ededed;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .content-wrapper {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 3em;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 768px) {
       body {
-        font-size: 0.9em;
-        padding: 12px;
+        font-size: 1em;
+        padding: 1.5em;
+        line-height: 1.65;
+      }
+
+      .content-wrapper {
+        padding: 2em 1.5em;
+        border-radius: 12px;
       }
 
       h1 {
+        font-size: 2.2em;
+      }
+
+      h2 {
         font-size: 1.8em;
+        margin-top: 1.6em;
+      }
+
+      h3 {
+        font-size: 1.4em;
+        margin-top: 1.4em;
+      }
+
+      div.sourceCode {
+        padding: 1em;
+        margin: 1.5em 0;
+        border-radius: 8px;
+      }
+
+      #TOC {
+        padding: 1.5em;
+        margin: 1.5em 0;
+      }
+
+      ol,
+      ul {
+        padding-left: 1.4em;
       }
     }
 
@@ -62,19 +128,31 @@
     }
 
     p {
-      margin: 1em 0;
+      margin: 1.4em 0;
+      font-size: 1.05em;
+      color: #2d3748;
     }
 
     a {
-      color: #1a1a1a;
+      color: #2563eb;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    a:hover {
+      color: #1d4ed8;
+      border-bottom-color: #1d4ed8;
     }
 
     a:visited {
-      color: #1a1a1a;
+      color: #7c3aed;
     }
 
     img {
       max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     svg {
@@ -88,7 +166,59 @@
     h4,
     h5,
     h6 {
-      margin-top: 1.4em;
+      margin-top: 1.6em;
+      margin-bottom: 0.8em;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      font-weight: 700;
+      margin-bottom: 1em;
+    }
+
+    h2 {
+      font-size: 2em;
+      margin-top: 2.5em;
+      padding-top: 1.5em;
+      border-top: 2px solid #e5e7eb;
+      position: relative;
+    }
+
+    h2:first-of-type {
+      border-top: none;
+      margin-top: 1.5em;
+      padding-top: 0;
+    }
+
+    h2::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      border-radius: 2px;
+    }
+
+    h3 {
+      font-size: 1.5em;
+      margin-top: 2em;
+      color: #1f2937;
+      position: relative;
+      padding-left: 1em;
+    }
+
+    h3::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      color: #3b82f6;
+      font-size: 0.8em;
+      top: 0.2em;
     }
 
     h5,
@@ -103,47 +233,85 @@
 
     ol,
     ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
+      padding-left: 1.8em;
+      margin: 1.4em 0;
+      line-height: 1.8;
+    }
+
+    li {
+      margin: 0.6em 0;
+      color: #374151;
     }
 
     li>ol,
     li>ul {
-      margin-top: 0;
+      margin-top: 0.4em;
+      margin-bottom: 0.4em;
+    }
+
+    strong {
+      font-weight: 600;
+      color: #1f2937;
     }
 
     blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
+      margin: 1.8em 0;
+      padding: 1.2em 1.5em;
+      border-left: 4px solid #3b82f6;
+      background-color: #f8fafc;
+      color: #475569;
+      font-style: italic;
+      border-radius: 0 8px 8px 0;
     }
 
     code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
+      font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 0.9em;
       margin: 0;
       hyphens: manual;
+      background-color: #f1f5f9;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #dc2626;
+      font-weight: 500;
     }
 
     pre {
-      margin: 1em 0;
+      margin: 1.8em 0;
       overflow: auto;
+      font-size: 0.95em;
+      line-height: 1.6;
     }
 
     pre code {
       padding: 0;
       overflow: visible;
       overflow-wrap: normal;
+      background-color: transparent;
+      color: inherit;
+      border-radius: 0;
     }
 
     div.sourceCode {
-      background-color: #f3f3f3;
+      background-color: #f8fafc;
       overflow: visible;
-      padding: 10px;
-      border-radius: 10px;
-      box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
+      padding: 1.5em;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
+      margin: 2em 0;
+      position: relative;
+    }
 
+    div.sourceCode::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      border-radius: 12px 12px 0 0;
     }
 
     .sourceCode {
@@ -153,54 +321,101 @@
 
     hr {
       border: none;
-      border-top: 1px solid #1a1a1a;
+      border-top: 2px solid #e5e7eb;
       height: 1px;
-      margin: 1em 0;
+      margin: 3em 0;
+      background: linear-gradient(90deg, transparent, #e5e7eb 20%, #e5e7eb 80%, transparent);
     }
 
     table {
-      margin: 1em 0;
+      margin: 2em 0;
       border-collapse: collapse;
       width: 100%;
       overflow-x: auto;
       display: block;
       font-variant-numeric: lining-nums tabular-nums;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e5e7eb;
     }
 
     table caption {
-      margin-bottom: 0.75em;
+      margin-bottom: 1em;
+      font-weight: 600;
+      font-size: 1.1em;
+      color: #374151;
     }
 
     tbody {
       margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
+      border-top: 1px solid #d1d5db;
+      border-bottom: 1px solid #d1d5db;
     }
 
     th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
+      border-top: 1px solid #d1d5db;
+      padding: 0.75em 1em;
+      background-color: #f9fafb;
+      font-weight: 600;
+      color: #374151;
+      text-align: left;
     }
 
     td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
+      padding: 0.75em 1em;
+      border-bottom: 1px solid #f3f4f6;
+      color: #4b5563;
+    }
+
+    tr:hover {
+      background-color: #f8fafc;
     }
 
     header {
-      margin-bottom: 4em;
+      margin-bottom: 5em;
       text-align: center;
+      padding: 2em 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    #TOC {
+      background-color: #f8fafc;
+      padding: 2em;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      margin: 2em 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     #TOC li {
       list-style: none;
+      margin: 0.5em 0;
     }
 
     #TOC ul {
-      padding-left: 1.3em;
+      padding-left: 1.5em;
     }
 
     #TOC>ul {
       padding-left: 0;
+    }
+
+    #TOC a {
+      color: #4338ca;
+      font-weight: 500;
+      padding: 0.3em 0.6em;
+      border-radius: 6px;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    #TOC a:hover {
+      background-color: #e0e7ff;
+      border-bottom: none;
     }
 
     #TOC a:not(:hover) {
@@ -232,16 +447,6 @@
 
     /* The extra [class] is a hack that increases specificity enough to
        override a similar rule in reveal.js */
-    ul.task-list[class] {
-      list-style: none;
-    }
-
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
 
     .display.math {
       display: block;
@@ -252,6 +457,69 @@
     /* CSS for syntax highlighting */
     html {
       -webkit-text-size-adjust: 100%;
+    }
+
+    /* Smooth scrolling for anchor links */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Selection styling */
+    ::selection {
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    ::-moz-selection {
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    /* Focus outline improvements */
+    a:focus,
+    button:focus,
+    input:focus {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+    }
+
+    /* Task list styling */
+    ul.task-list[class] {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul.task-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75em;
+      margin: 0.8em 0;
+      padding: 0.6em;
+      background-color: #f8fafc;
+      border-radius: 8px;
+      border-left: 3px solid #e5e7eb;
+      transition: all 0.2s ease;
+    }
+
+    ul.task-list li:hover {
+      background-color: #f1f5f9;
+      border-left-color: #3b82f6;
+    }
+
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 1.1em;
+      height: 1.1em;
+      margin: 0;
+      vertical-align: top;
+      accent-color: #3b82f6;
+    }
+
+    ul.task-list li label {
+      flex: 1;
+      cursor: pointer;
+      color: #374151;
+      font-weight: 500;
     }
 
     pre>code.sourceCode {
@@ -422,8 +690,6 @@
     }
 
     /* Error */
-    code span.ex {}
-
     /* Extension */
     code span.fl {
       color: #40a070;
@@ -505,87 +771,141 @@
 </head>
 
 <body>
-  <h1 id="code-quality-guide">Code Quality Guide</h1>
-  <h2 id="table-of-contents">Table of Contents</h2>
-  <ul>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#tech-stack">Tech Stack</a></li>
-    <li><a href="#code-style-and-formatting">Code Style and
-        Formatting</a></li>
-    <li><a href="#naming-conventions">Naming Conventions</a></li>
-    <li><a href="#error-handling">Error Handling</a></li>
-    <li><a href="#code-duplication">Code Duplication</a></li>
-    <li><a href="#constants-and-configuration">Constants and
-        Configuration</a></li>
-    <li><a href="#documentation">Documentation</a></li>
-    <li><a href="#security-best-practices">Security Best Practices</a></li>
-    <li><a href="#performance-considerations">Performance
-        Considerations</a></li>
-    <li><a href="#branches-and-pull-requests">Branches and Pull
-        Requests</a></li>
-    <li><a href="#code-journey-logging">Code Journey Logging</a></li>
-    <li><a href="#code-review-guidelines">Code Review Guidelines</a></li>
-    <li><a href="#tools-and-automation">Tools and Automation</a></li>
-  </ul>
-  <h2 id="introduction">Introduction</h2>
-  <p>This guide establishes coding standards and best practices for our
-    development team. Following these guidelines ensures code consistency,
-    maintainability, and collaboration efficiency across all projects.</p>
-  <h3 id="why-code-quality-matters">Why Code Quality Matters</h3>
-  <ul>
-    <li><strong>Maintainability</strong>: Clean code is easier to understand
-      and modify</li>
-    <li><strong>Collaboration</strong>: Consistent standards help team
-      members work together effectively</li>
-    <li><strong>Debugging</strong>: Well-structured code makes identifying
-      and fixing issues faster</li>
-    <li><strong>Performance</strong>: Quality code often performs better and
-      uses resources efficiently</li>
-  </ul>
-  <h2 id="tech-stack">Tech Stack</h2>
-  <p>Our development team uses the following technologies and frameworks. Understanding our tech stack helps ensure consistent implementation and best practices across all projects.</p>
-  
-  <h3 id="frontend-frameworks">Frontend Frameworks</h3>
-  <ul>
-    <li><strong>React</strong>: Component-based UI library for building user interfaces</li>
-    <li><strong>Next.js</strong>: Full-stack React framework with server-side rendering and routing</li>
-    <li><strong>Tailwind CSS</strong>: Utility-first CSS framework for rapid UI development</li>
-  </ul>
+  <div class="content-wrapper">
+    <h1 id="technical-guidance">Technical Guidance</h1>
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ul>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#tech-stack">Tech Stack</a></li>
+      <li><a href="#planning-outlining">Planning/Outlining</a></li>
+      <li><a href="#code-style-and-formatting">Code Style and
+          Formatting</a></li>
+      <li><a href="#naming-conventions">Naming Conventions</a></li>
+      <li><a href="#error-handling">Error Handling</a></li>
+      <li><a href="#code-duplication">Code Duplication</a></li>
+      <li><a href="#constants-and-configuration">Constants and
+          Configuration</a></li>
+      <li><a href="#documentation">Documentation</a></li>
+      <li><a href="#security-best-practices">Security Best Practices</a></li>
+      <li><a href="#performance-considerations">Performance
+          Considerations</a></li>
+      <li><a href="#branches-and-pull-requests">Branches and Pull
+          Requests</a></li>
+      <li><a href="#code-journey-logging">Code Journey Logging</a></li>
+      <li><a href="#code-review-guidelines">Code Review Guidelines</a></li>
+    </ul>
+    <h2 id="introduction">Introduction</h2>
+    <p>This guide establishes coding standards and best practices for our
+      development team. Following these guidelines ensures code consistency,
+      maintainability, and collaboration efficiency across all projects.</p>
+    <h3 id="why-code-quality-matters">Why Code Quality Matters</h3>
+    <ul>
+      <li><strong>Maintainability</strong>: Clean code is easier to understand
+        and modify</li>
+      <li><strong>Collaboration</strong>: Consistent standards help team
+        members work together effectively</li>
+      <li><strong>Debugging</strong>: Well-structured code makes identifying
+        and fixing issues faster</li>
+      <li><strong>Performance</strong>: Quality code often performs better and
+        uses resources efficiently</li>
+    </ul>
+    <h2 id="tech-stack">Tech Stack</h2>
+    <p>Our development team uses the following technologies and frameworks. Understanding our tech stack helps ensure
+      consistent implementation and best practices across all projects.</p>
 
-  <h3 id="backend-frameworks">Backend Frameworks</h3>
-  <ul>
-    <li><strong>Node.js</strong>: JavaScript runtime for server-side development</li>
-    <li><strong>Express.js</strong>: Minimalist web framework for Node.js applications</li>
-    <li><strong>FastAPI</strong>: Modern Python web framework for building APIs</li>
-  </ul>
+    <h3 id="frontend-frameworks">Frontend Frameworks</h3>
+    <ul>
+      <li><strong>React</strong>: Component-based UI library for building user interfaces</li>
+      <li><strong>Next.js</strong>: Full-stack React framework with server-side rendering and routing</li>
+      <li><strong>Tailwind CSS</strong>: Utility-first CSS framework for rapid UI development</li>
+    </ul>
 
-  <h3 id="ai-and-audio-services">AI and Audio Services</h3>
-  <ul>
-    <li><strong>OpenAI SDK</strong>: Integration with OpenAI's AI models and services</li>
-    <li><strong>OpenRouter SDK</strong>: Multi-provider AI model routing and access</li>
-    <li><strong>Whisper</strong>: Speech-to-text transcription service</li>
-    <li><strong>ElevenLabs</strong>: Text-to-speech synthesis and voice generation</li>
-  </ul>
+    <h3 id="backend-frameworks">Backend Frameworks</h3>
+    <ul>
+      <li><strong>Node.js</strong>: JavaScript runtime for server-side development</li>
+      <li><strong>Express.js</strong>: Minimalist web framework for Node.js applications</li>
+      <li><strong>FastAPI</strong>: Modern Python web framework for building APIs</li>
+    </ul>
 
-  <h3 id="development-guidelines">Development Guidelines</h3>
-  <ul>
-    <li>Follow framework-specific best practices and conventions</li>
-    <li>Use TypeScript with React and Next.js projects for better type safety</li>
-    <li>Implement proper error handling for AI service integrations</li>
-    <li>Use environment variables for API keys and sensitive configuration</li>
-    <li>Follow responsive design principles with Tailwind CSS</li>
-  </ul>
-  <h2 id="code-style-and-formatting">Code Style and Formatting</h2>
-  <h3 id="general-principles">General Principles</h3>
-  <ul>
-    <li>Use consistent indentation (2 or 4 spaces, never tabs)</li>
-    <li>Keep lines under 80-100 characters</li>
-    <li>Use meaningful whitespace to separate logical blocks</li>
-    <li>Follow language-specific style guides</li>
-  </ul>
-  <h3 id="javascripttypescript-example">JavaScript/TypeScript Example</h3>
-  <div class="sourceCode" id="cb1">
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
+    <h3 id="ai-and-audio-services">AI and Audio Services</h3>
+    <ul>
+      <li><strong>OpenAI SDK</strong>: Integration with OpenAI's AI models and services</li>
+      <li><strong>OpenRouter SDK</strong>: Multi-provider AI model routing and access</li>
+      <li><strong>Whisper</strong>: Speech-to-text transcription service</li>
+      <li><strong>ElevenLabs</strong>: Text-to-speech synthesis and voice generation</li>
+    </ul>
+
+    <h3 id="development-guidelines">Development Guidelines</h3>
+    <ul>
+      <li>Follow framework-specific best practices and conventions</li>
+      <li>Use TypeScript with React and Next.js projects for better type safety</li>
+      <li>Implement proper error handling for AI service integrations</li>
+      <li>Use environment variables for API keys and sensitive configuration</li>
+      <li>Follow responsive design principles with Tailwind CSS</li>
+    </ul>
+
+    <h2 id="planning-outlining">Planning/Outlining</h2>
+    <p>Before diving into code implementation, it's crucial to plan and outline your project architecture and workflow.
+      Using visual diagrams helps clarify the system design and ensures all team members understand the project
+      structure.</p>
+
+    <h3 id="mermaid-diagrams">Mermaid Diagrams for System Design</h3>
+    <p>We recommend using <strong>Mermaid</strong> diagrams to visualize system flows, user interactions, and technical
+      architecture. Mermaid is a markdown-based diagramming tool that allows you to create flowcharts, sequence
+      diagrams, and more using simple text syntax.</p>
+
+    <h4 id="benefits-of-visual-planning">Benefits of Visual Planning</h4>
+    <ul>
+      <li><strong>Clarity</strong>: Visual representations make complex systems easier to understand</li>
+      <li><strong>Communication</strong>: Diagrams facilitate better discussions with team members and stakeholders</li>
+      <li><strong>Documentation</strong>: Serves as living documentation that can be updated as the system evolves</li>
+      <li><strong>Problem Identification</strong>: Helps identify potential issues before implementation begins</li>
+    </ul>
+
+    <h4 id="diagram-examples">Example Diagrams</h4>
+    <p>Here are two examples of mermaid diagrams that demonstrate different aspects of system planning:</p>
+
+    <h5 id="session-management-flow">Session Management Flow</h5>
+    <p>This diagram illustrates a typical session management and authentication flow, showing decision points and user
+      interactions:</p>
+    <img src="diagram1.png" alt="Session Management Flow Diagram"
+      style="max-width: 100%; height: auto; border: 1px solid #e6e6e6; border-radius: 8px; margin: 1em 0;" />
+
+    <h5 id="conversational-ai-system">Conversational AI System</h5>
+    <p>This diagram shows the architecture of a conversational AI system with context management and user interaction
+      loops:</p>
+    <img src="diagram2.png" alt="Conversational AI System Diagram"
+      style="max-width: 100%; height: auto; border: 1px solid #e6e6e6; border-radius: 8px; margin: 1em 0;" />
+
+    <h4 id="creating-mermaid-diagrams">Creating Mermaid Diagrams</h4>
+    <p>To create your own mermaid diagrams:</p>
+    <ol>
+      <li>Use the <a href="https://mermaid.live" target="_blank">Mermaid Live Editor</a> for real-time editing and
+        preview</li>
+      <li>Include mermaid diagrams in your project documentation (README files, wikis)</li>
+      <li>Consider using tools like VS Code with Mermaid extensions for local development</li>
+      <li>Export diagrams as images for presentations and documentation</li>
+    </ol>
+
+    <h4 id="planning-best-practices">Planning Best Practices</h4>
+    <ul>
+      <li>Start with high-level system architecture before diving into details</li>
+      <li>Include all major components, data flows, and decision points</li>
+      <li>Review diagrams with the team before beginning implementation</li>
+      <li>Update diagrams as the system evolves during development</li>
+      <li>Use consistent naming conventions and symbols across all diagrams</li>
+    </ul>
+    <h2 id="code-style-and-formatting">Code Style and Formatting</h2>
+    <h3 id="general-principles">General Principles</h3>
+    <ul>
+      <li>Use consistent indentation (2 or 4 spaces, never tabs)</li>
+      <li>Keep lines under 80-100 characters</li>
+      <li>Use meaningful whitespace to separate logical blocks</li>
+      <li>Follow language-specific style guides</li>
+    </ul>
+    <h3 id="javascripttypescript-example">JavaScript/TypeScript Example</h3>
+    <div class="sourceCode" id="cb1">
+      <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">calculateUserAge</span>(birthDate<span class="op">,</span> currentDate <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>()) {</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> ageInMilliseconds <span class="op">=</span> currentDate<span class="op">.</span><span class="fu">getTime</span>() <span class="op">-</span> birthDate<span class="op">.</span><span class="fu">getTime</span>()<span class="op">;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> ageInYears <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(ageInMilliseconds <span class="op">/</span> (<span class="fl">365.25</span> <span class="op">*</span> <span class="dv">24</span> <span class="op">*</span> <span class="dv">60</span> <span class="op">*</span> <span class="dv">60</span> <span class="op">*</span> <span class="dv">1000</span>))<span class="op">;</span></span>
@@ -599,11 +919,11 @@
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> ageInYears<span class="op">=</span><span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(ageInMilliseconds<span class="op">/</span>(<span class="fl">365.25</span><span class="op">*</span><span class="dv">24</span><span class="op">*</span><span class="dv">60</span><span class="op">*</span><span class="dv">60</span><span class="op">*</span><span class="dv">1000</span>))<span class="op">;</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> ageInYears<span class="op">;</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
-  </div>
-  <h3 id="python-example">Python Example</h3>
-  <div class="sourceCode" id="cb2">
-    <pre
-      class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Good</span></span>
+    </div>
+    <h3 id="python-example">Python Example</h3>
+    <div class="sourceCode" id="cb2">
+      <pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Good</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_user_data(users: List[Dict[<span class="bu">str</span>, Any]]) <span class="op">-&gt;</span> List[Dict[<span class="bu">str</span>, Any]]:</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Process a list of user data dictionaries.&quot;&quot;&quot;</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    processed_users <span class="op">=</span> []</span>
@@ -627,17 +947,17 @@
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            processed_user<span class="op">=</span>{<span class="st">&#39;id&#39;</span>:user[<span class="st">&#39;id&#39;</span>],<span class="st">&#39;name&#39;</span>:user[<span class="st">&#39;name&#39;</span>].strip().title(),<span class="st">&#39;email&#39;</span>:user[<span class="st">&#39;email&#39;</span>].lower()}</span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            processed_users.append(processed_user)</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> processed_users</span></code></pre>
-  </div>
-  <h2 id="naming-conventions">Naming Conventions</h2>
-  <h3 id="variables-and-functions">Variables and Functions</h3>
-  <ul>
-    <li>Use descriptive, pronounceable names</li>
-    <li>Prefer full words over abbreviations</li>
-    <li>Use camelCase for JavaScript/TypeScript, snake_case for Python</li>
-  </ul>
-  <div class="sourceCode" id="cb3">
-    <pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
+    </div>
+    <h2 id="naming-conventions">Naming Conventions</h2>
+    <h3 id="variables-and-functions">Variables and Functions</h3>
+    <ul>
+      <li>Use descriptive, pronounceable names</li>
+      <li>Prefer full words over abbreviations</li>
+      <li>Use camelCase for JavaScript/TypeScript, snake_case for Python</li>
+    </ul>
+    <div class="sourceCode" id="cb3">
+      <pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> userAccountBalance <span class="op">=</span> <span class="dv">1500</span><span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> isUserAuthenticated <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> calculateMonthlyInterest <span class="op">=</span> (principal<span class="op">,</span> rate) <span class="kw">=&gt;</span> principal <span class="op">*</span> rate <span class="op">/</span> <span class="dv">12</span><span class="op">;</span></span>
@@ -646,15 +966,15 @@
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> uab <span class="op">=</span> <span class="dv">1500</span><span class="op">;</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> isUsrAuth <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> calcMnthlyInt <span class="op">=</span> (p<span class="op">,</span> r) <span class="kw">=&gt;</span> p <span class="op">*</span> r <span class="op">/</span> <span class="dv">12</span><span class="op">;</span></span></code></pre>
-  </div>
-  <h3 id="constants">Constants</h3>
-  <ul>
-    <li>Use UPPER_SNAKE_CASE for constants</li>
-    <li>Group related constants in objects or enums</li>
-  </ul>
-  <div class="sourceCode" id="cb4">
-    <pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
+    </div>
+    <h3 id="constants">Constants</h3>
+    <ul>
+      <li>Use UPPER_SNAKE_CASE for constants</li>
+      <li>Group related constants in objects or enums</li>
+    </ul>
+    <div class="sourceCode" id="cb4">
+      <pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> HTTP_STATUS_CODES <span class="op">=</span> {</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">OK</span><span class="op">:</span> <span class="dv">200</span><span class="op">,</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">NOT_FOUND</span><span class="op">:</span> <span class="dv">404</span><span class="op">,</span></span>
@@ -668,17 +988,17 @@
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> ok <span class="op">=</span> <span class="dv">200</span><span class="op">;</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> notFound <span class="op">=</span> <span class="dv">404</span><span class="op">;</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> maxRetries <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span></code></pre>
-  </div>
-  <h2 id="error-handling">Error Handling</h2>
-  <h3 id="use-proper-error-handling-patterns">Use Proper Error Handling
-    Patterns</h3>
-  <ul>
-    <li>Always handle errors appropriately</li>
-    <li>Provide meaningful error messages</li>
-    <li>Use try-catch blocks judiciously</li>
-  </ul>
-  <div class="sourceCode" id="cb5">
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
+    </div>
+    <h2 id="error-handling">Error Handling</h2>
+    <h3 id="use-proper-error-handling-patterns">Use Proper Error Handling
+      Patterns</h3>
+    <ul>
+      <li>Always handle errors appropriately</li>
+      <li>Provide meaningful error messages</li>
+      <li>Use try-catch blocks judiciously</li>
+    </ul>
+    <div class="sourceCode" id="cb5">
+      <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">fetchUserData</span>(userId) {</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> api<span class="op">.</span><span class="fu">get</span>(<span class="vs">`/users/</span><span class="sc">${</span>userId<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
@@ -703,11 +1023,11 @@
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
-  </div>
-  <h2 id="code-duplication">Code Duplication</h2>
-  <h3 id="extract-repeated-logic">Extract Repeated Logic</h3>
-  <div class="sourceCode" id="cb7">
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
+    </div>
+    <h2 id="code-duplication">Code Duplication</h2>
+    <h3 id="extract-repeated-logic">Extract Repeated Logic</h3>
+    <div class="sourceCode" id="cb7">
+      <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">formatCurrency</span>(amount) {</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">new</span> <span class="bu">Intl</span><span class="op">.</span><span class="fu">NumberFormat</span>(<span class="st">&#39;en-US&#39;</span><span class="op">,</span> {</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">style</span><span class="op">:</span> <span class="st">&#39;currency&#39;</span><span class="op">,</span></span>
@@ -745,10 +1065,10 @@
 <span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    })<span class="op">.</span><span class="fu">format</span>(order<span class="op">.</span><span class="at">total</span>)</span>
 <span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
 <span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
-  </div>
-  <h3 id="avoid-repeated-nested-object-access">Avoid Repeated Nested Object Access</h3>
-  <div class="sourceCode" id="cb8">
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
+    </div>
+    <h3 id="avoid-repeated-nested-object-access">Avoid Repeated Nested Object Access</h3>
+    <div class="sourceCode" id="cb8">
+      <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">displayUserInfo</span>(chat) {</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> firstName <span class="op">=</span> chat<span class="op">.</span><span class="at">session</span><span class="op">.</span><span class="at">user</span><span class="op">.</span><span class="at">firstname</span><span class="op">;</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> lastName <span class="op">=</span> chat<span class="op">.</span><span class="at">session</span><span class="op">.</span><span class="at">user</span><span class="op">.</span><span class="at">lastname</span><span class="op">;</span></span>
@@ -768,17 +1088,17 @@
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">displayUserInfo</span>(chat) {</span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="vs">`Welcome </span><span class="sc">${</span>chat<span class="op">.</span><span class="at">session</span><span class="op">.</span><span class="at">user</span><span class="op">.</span><span class="at">firstname</span><span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>chat<span class="op">.</span><span class="at">session</span><span class="op">.</span><span class="at">user</span><span class="op">.</span><span class="at">lastname</span><span class="sc">}</span><span class="vs">! Your email is </span><span class="sc">${</span>chat<span class="op">.</span><span class="at">session</span><span class="op">.</span><span class="at">user</span><span class="op">.</span><span class="at">email</span><span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
-  </div>
-  <h2 id="constants-and-configuration">Constants and Configuration</h2>
-  <h3 id="use-constants-instead-of-hardcoded-values">Use Constants Instead
-    of Hardcoded Values</h3>
-  <ul>
-    <li>Define constants for magic numbers and strings</li>
-    <li>Use configuration files for environment-specific values</li>
-    <li>Make code more maintainable and less error-prone</li>
-  </ul>
-  <div class="sourceCode" id="cb9">
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
+    </div>
+    <h2 id="constants-and-configuration">Constants and Configuration</h2>
+    <h3 id="use-constants-instead-of-hardcoded-values">Use Constants Instead
+      of Hardcoded Values</h3>
+    <ul>
+      <li>Define constants for magic numbers and strings</li>
+      <li>Use configuration files for environment-specific values</li>
+      <li>Make code more maintainable and less error-prone</li>
+    </ul>
+    <div class="sourceCode" id="cb9">
+      <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> PAGINATION <span class="op">=</span> {</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">DEFAULT_PAGE_SIZE</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">MAX_PAGE_SIZE</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span></span>
@@ -797,7 +1117,6 @@
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ORDERS</span><span class="op">:</span> <span class="st">&#39;/api/v1/orders&#39;</span><span class="op">,</span></span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">PRODUCTS</span><span class="op">:</span> <span class="st">&#39;/api/v1/products&#39;</span></span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getUsersPaginated</span>(page <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> pageSize <span class="op">=</span> PAGINATION<span class="op">.</span><span class="at">DEFAULT_PAGE_SIZE</span>) {</span>
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (pageSize <span class="op">&gt;</span> PAGINATION<span class="op">.</span><span class="at">MAX_PAGE_SIZE</span>) {</span>
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    pageSize <span class="op">=</span> PAGINATION<span class="op">.</span><span class="at">MAX_PAGE_SIZE</span><span class="op">;</span></span>
@@ -814,10 +1133,10 @@
 <span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">fetch</span>(<span class="vs">`/api/v1/users?page=</span><span class="sc">${</span>page<span class="sc">}</span><span class="vs">&amp;limit=</span><span class="sc">${</span>pageSize<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span>  <span class="co">// Hardcoded URL</span></span>
 <span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
-  </div>
-  <h3 id="environment-configuration">Environment Configuration</h3>
-  <div class="sourceCode" id="cb9">
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
+    </div>
+    <h3 id="environment-configuration">Environment Configuration</h3>
+    <div class="sourceCode" id="cb9">
+      <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> CONFIG <span class="op">=</span> {</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">API_BASE_URL</span><span class="op">:</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">API_BASE_URL</span> <span class="op">||</span> <span class="st">&#39;http://localhost:3000&#39;</span><span class="op">,</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">DATABASE_URL</span><span class="op">:</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">DATABASE_URL</span><span class="op">,</span></span>
@@ -837,16 +1156,16 @@
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">body</span><span class="op">:</span> file</span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
-  </div>
-  <h2 id="documentation">Documentation</h2>
-  <h3 id="code-comments">Code Comments</h3>
-  <ul>
-    <li>Write comments that explain “why”, not “what”</li>
-    <li>Keep comments up-to-date with code changes</li>
-    <li>Use docstrings for function documentation</li>
-  </ul>
-  <div class="sourceCode" id="cb10">
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
+    </div>
+    <h2 id="documentation">Documentation</h2>
+    <h3 id="code-comments">Code Comments</h3>
+    <ul>
+      <li>Write comments that explain “why”, not “what”</li>
+      <li>Keep comments up-to-date with code changes</li>
+      <li>Use docstrings for function documentation</li>
+    </ul>
+    <div class="sourceCode" id="cb10">
+      <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * Calculates the compound interest for an investment.</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * Uses the formula: A = P(1 + r/n)^(nt)</span></span>
@@ -868,23 +1187,23 @@
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Multiply principal by rate calculation</span></span>
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> principal <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>(<span class="dv">1</span> <span class="op">+</span> rate <span class="op">/</span> compoundingFrequency<span class="op">,</span> compoundingFrequency <span class="op">*</span> years)<span class="op">;</span></span>
 <span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
-  </div>
-  <h3 id="readme-files">README Files</h3>
-  <ul>
-    <li>Include clear setup instructions</li>
-    <li>Document API endpoints and usage</li>
-    <li>Provide examples and common use cases</li>
-  </ul>
-  <h2 id="security-best-practices">Security Best Practices</h2>
-  <h3 id="secret-management">Secret Management</h3>
-  <ul>
-    <li>Never commit secrets to version control</li>
-    <li>Use environment variables for configuration</li>
-    <li>Implement proper key rotation</li>
-  </ul>
-  <div class="sourceCode" id="cb11">
-    <pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
+    </div>
+    <h3 id="readme-files">README Files</h3>
+    <ul>
+      <li>Include clear setup instructions</li>
+      <li>Document API endpoints and usage</li>
+      <li>Provide examples and common use cases</li>
+    </ul>
+    <h2 id="security-best-practices">Security Best Practices</h2>
+    <h3 id="secret-management">Secret Management</h3>
+    <ul>
+      <li>Never commit secrets to version control</li>
+      <li>Use environment variables for configuration</li>
+      <li>Implement proper key rotation</li>
+    </ul>
+    <div class="sourceCode" id="cb11">
+      <pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> config <span class="op">=</span> {</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">apiKey</span><span class="op">:</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">API_KEY</span><span class="op">,</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">databaseUrl</span><span class="op">:</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">DATABASE_URL</span><span class="op">,</span></span>
@@ -900,17 +1219,17 @@
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">apiKey</span><span class="op">:</span> <span class="st">&#39;sk-1234567890abcdef&#39;</span><span class="op">,</span> <span class="co">// Never hardcode secrets</span></span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">databaseUrl</span><span class="op">:</span> <span class="st">&#39;postgres://user:password@localhost/db&#39;</span></span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre>
-  </div>
-  <h2 id="performance-considerations">Performance Considerations</h2>
-  <h3 id="optimize-for-readability-first">Optimize for Readability
-    First</h3>
-  <ul>
-    <li>Write clear code first, optimize later</li>
-    <li>Profile before optimizing</li>
-    <li>Use appropriate data structures</li>
-  </ul>
-  <div class="sourceCode" id="cb12">
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good - Clear and efficient</span></span>
+    </div>
+    <h2 id="performance-considerations">Performance Considerations</h2>
+    <h3 id="optimize-for-readability-first">Optimize for Readability
+      First</h3>
+    <ul>
+      <li>Write clear code first, optimize later</li>
+      <li>Profile before optimizing</li>
+      <li>Use appropriate data structures</li>
+    </ul>
+    <div class="sourceCode" id="cb12">
+      <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good - Clear and efficient</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">findUserById</span>(users<span class="op">,</span> targetId) {</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Create a Map for O(1) lookup if called frequently</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> userMap <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>(users<span class="op">.</span><span class="fu">map</span>(user <span class="kw">=&gt;</span> [user<span class="op">.</span><span class="at">id</span><span class="op">,</span> user]))<span class="op">;</span></span>
@@ -932,13 +1251,13 @@
 <span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
-  </div>
-  <h2 id="branches-and-pull-requests">Branches and Pull Requests</h2>
-  <h3 id="branch-naming-conventions">Branch Naming Conventions</h3>
-  <p>Use descriptive branch names that indicate the type of work:</p>
-  <div class="sourceCode" id="cb13">
-    <pre
-      class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Good branch names</span></span>
+    </div>
+    <h2 id="branches-and-pull-requests">Branches and Pull Requests</h2>
+    <h3 id="branch-naming-conventions">Branch Naming Conventions</h3>
+    <p>Use descriptive branch names that indicate the type of work:</p>
+    <div class="sourceCode" id="cb13">
+      <pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Good branch names</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">feature/user-authentication</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">bugfix/payment-calculation-error</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="ex">hotfix/security-vulnerability-fix</span></span>
@@ -951,23 +1270,23 @@
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="ex">update</span></span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="ex">temp</span></span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="ex">branch1</span></span></code></pre>
-  </div>
-  <h3 id="branch-types">Branch Types</h3>
-  <ul>
-    <li><strong>feature/</strong>: New features or enhancements</li>
-    <li><strong>bugfix/</strong>: Bug fixes for existing functionality</li>
-    <li><strong>hotfix/</strong>: Critical fixes that need immediate
-      attention</li>
-    <li><strong>chore/</strong>: Maintenance tasks, dependency updates</li>
-    <li><strong>docs/</strong>: Documentation updates</li>
-    <li><strong>refactor/</strong>: Code refactoring without functional
-      changes</li>
-  </ul>
-  <h3 id="pull-request-best-practices">Pull Request Best Practices</h3>
-  <h4 id="pr-title-and-description">PR Title and Description</h4>
-  <div class="sourceCode" id="cb14">
-    <pre
-      class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># ✅ Good PR Title</span></span>
+    </div>
+    <h3 id="branch-types">Branch Types</h3>
+    <ul>
+      <li><strong>feature/</strong>: New features or enhancements</li>
+      <li><strong>bugfix/</strong>: Bug fixes for existing functionality</li>
+      <li><strong>hotfix/</strong>: Critical fixes that need immediate
+        attention</li>
+      <li><strong>chore/</strong>: Maintenance tasks, dependency updates</li>
+      <li><strong>docs/</strong>: Documentation updates</li>
+      <li><strong>refactor/</strong>: Code refactoring without functional
+        changes</li>
+    </ul>
+    <h3 id="pull-request-best-practices">Pull Request Best Practices</h3>
+    <h4 id="pr-title-and-description">PR Title and Description</h4>
+    <div class="sourceCode" id="cb14">
+      <pre
+        class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># ✅ Good PR Title</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Add user role-based access control to admin dashboard</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu"># ✅ Good PR Description</span></span>
@@ -990,35 +1309,35 @@
 <span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Screenshots</span></span>
 <span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Include relevant screenshots if UI changes</span><span class="co">]</span></span></code></pre>
-  </div>
-  <h4 id="pr-size-and-scope">PR Size and Scope</h4>
-  <ul>
-    <li>Keep PRs small and focused (&lt; 400 lines of code when
-      possible)</li>
-    <li>One feature or fix per PR</li>
-    <li>Split large changes into multiple smaller PRs</li>
-  </ul>
-  <h4 id="before-creating-a-pr">Before Creating a PR</h4>
-  <ul class="task-list">
-    <li><label><input type="checkbox" />Code follows style
-        guidelines</label></li>
-    <li><label><input type="checkbox" />All tests pass</label></li>
-    <li><label><input type="checkbox" />Documentation updated if
-        needed</label></li>
-    <li><label><input type="checkbox" />No debugging code left
-        behind</label></li>
-    <li><label><input type="checkbox" />Self-review completed</label></li>
-  </ul>
-  <h2 id="code-journey-logging">Code Journey Logging</h2>
-  <h3 id="document-important-decisions-and-changes">Document Important
-    Decisions and Changes</h3>
-  <p>Use comments and commit messages to create a trail of why changes
-    were made.</p>
-  <h4 id="commit-message-best-practices">Commit Message Best
-    Practices</h4>
-  <div class="sourceCode" id="cb15">
-    <pre
-      class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Good commit messages</span></span>
+    </div>
+    <h4 id="pr-size-and-scope">PR Size and Scope</h4>
+    <ul>
+      <li>Keep PRs small and focused (&lt; 400 lines of code when
+        possible)</li>
+      <li>One feature or fix per PR</li>
+      <li>Split large changes into multiple smaller PRs</li>
+    </ul>
+    <h4 id="before-creating-a-pr">Before Creating a PR</h4>
+    <ul class="task-list">
+      <li><label><input type="checkbox" />Code follows style
+          guidelines</label></li>
+      <li><label><input type="checkbox" />All tests pass</label></li>
+      <li><label><input type="checkbox" />Documentation updated if
+          needed</label></li>
+      <li><label><input type="checkbox" />No debugging code left
+          behind</label></li>
+      <li><label><input type="checkbox" />Self-review completed</label></li>
+    </ul>
+    <h2 id="code-journey-logging">Code Journey Logging</h2>
+    <h3 id="document-important-decisions-and-changes">Document Important
+      Decisions and Changes</h3>
+    <p>Use comments and commit messages to create a trail of why changes
+      were made.</p>
+    <h4 id="commit-message-best-practices">Commit Message Best
+      Practices</h4>
+    <div class="sourceCode" id="cb15">
+      <pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Good commit messages</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">feat:</span> add email notification system for order updates</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="ex">fix:</span> resolve race condition in payment processing</span>
@@ -1034,11 +1353,11 @@
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="ex">update</span> code</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="ex">changes</span></span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="ex">wip</span></span></code></pre>
-  </div>
-  <h4 id="code-journey-comments">Code Journey Comments</h4>
-  <p>Document complex decisions and their reasoning:</p>
-  <div class="sourceCode" id="cb16">
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good journey logging</span></span>
+    </div>
+    <h4 id="code-journey-comments">Code Journey Comments</h4>
+    <p>Document complex decisions and their reasoning:</p>
+    <div class="sourceCode" id="cb16">
+      <pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Good journey logging</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * 2025-06-03: Switched from REST to GraphQL for user queries</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * Reason: Frontend team needed flexible data fetching to reduce over-fetching</span></span>
@@ -1058,12 +1377,12 @@
 <span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">processPayment</span>(paymentData) {</span>
 <span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">retryWithBackoff</span>(() <span class="kw">=&gt;</span> paymentApi<span class="op">.</span><span class="fu">charge</span>(paymentData)<span class="op">,</span> MAX_RETRIES)<span class="op">;</span></span>
 <span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
-  </div>
-  <h4 id="change-log-documentation">Change Log Documentation</h4>
-  <p>Maintain a CHANGELOG.md for significant updates:</p>
-  <div class="sourceCode" id="cb17">
-    <pre
-      class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Changelog</span></span>
+    </div>
+    <h4 id="change-log-documentation">Change Log Documentation</h4>
+    <p>Maintain a CHANGELOG.md for significant updates:</p>
+    <div class="sourceCode" id="cb17">
+      <pre
+        class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Changelog</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## [2.1.0] - 2025-06-03</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1082,49 +1401,50 @@
 <span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="fu">### Removed</span></span>
 <span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Deprecated REST endpoints (v1 API)</span></code></pre>
-  </div>
-  <h2 id="code-review-guidelines">Code Review Guidelines</h2>
-  <h3 id="what-to-look-for">What to Look For</h3>
-  <ol type="1">
-    <li><strong>Functionality</strong>: Does the code work as intended?</li>
-    <li><strong>Style</strong>: Does it follow our coding standards?</li>
-    <li><strong>Performance</strong>: Are there any obvious performance
-      issues?</li>
-    <li><strong>Security</strong>: Are there any security
-      vulnerabilities?</li>
-    <li><strong>Maintainability</strong>: Is the code easy to understand and
-      modify?</li>
-  </ol>
-  <h3 id="review-checklist">Review Checklist</h3>
-  <ul class="task-list">
-    <li><label><input type="checkbox" />Code follows naming
-        conventions</label></li>
-    <li><label><input type="checkbox" />No hardcoded values (uses constants
-        instead)</label></li>
-    <li><label><input type="checkbox" />Error handling is
-        appropriate</label></li>
-    <li><label><input type="checkbox" />Security best practices are
-        followed</label></li>
-    <li><label><input type="checkbox" />No code duplication</label></li>
-    <li><label><input type="checkbox" />Documentation is
-        updated</label></li>
-    <li><label><input type="checkbox" />No debugging code or console.logs
-        left in</label></li>
-    <li><label><input type="checkbox" />Performance implications
-        considered</label></li>
-  </ul>
-  <h2 id="conclusion">Conclusion</h2>
-  <p>Following these code quality guidelines will help our team: - Produce
-    more maintainable code - Reduce bugs and technical debt - Improve
-    collaboration and code reviews - Deliver better products faster</p>
-  <p>Remember: These are guidelines, not rigid rules. Use your judgment
-    and discuss with the team when you need to deviate from these
-    standards.</p>
-  <hr />
-  <p><strong>Questions or Suggestions?</strong> If you have questions
-    about these guidelines or suggestions for improvements, please reach out
-    to us.</p>
-  <p><em>Last updated: June 3, 2025</em></p>
+    </div>
+    <h2 id="code-review-guidelines">Code Review Guidelines</h2>
+    <h3 id="what-to-look-for">What to Look For</h3>
+    <ol type="1">
+      <li><strong>Functionality</strong>: Does the code work as intended?</li>
+      <li><strong>Style</strong>: Does it follow our coding standards?</li>
+      <li><strong>Performance</strong>: Are there any obvious performance
+        issues?</li>
+      <li><strong>Security</strong>: Are there any security
+        vulnerabilities?</li>
+      <li><strong>Maintainability</strong>: Is the code easy to understand and
+        modify?</li>
+    </ol>
+    <h3 id="review-checklist">Review Checklist</h3>
+    <ul class="task-list">
+      <li><label><input type="checkbox" />Code follows naming
+          conventions</label></li>
+      <li><label><input type="checkbox" />No hardcoded values (uses constants
+          instead)</label></li>
+      <li><label><input type="checkbox" />Error handling is
+          appropriate</label></li>
+      <li><label><input type="checkbox" />Security best practices are
+          followed</label></li>
+      <li><label><input type="checkbox" />No code duplication</label></li>
+      <li><label><input type="checkbox" />Documentation is
+          updated</label></li>
+      <li><label><input type="checkbox" />No debugging code or console.logs
+          left in</label></li>
+      <li><label><input type="checkbox" />Performance implications
+          considered</label></li>
+    </ul>
+    <h2 id="conclusion">Conclusion</h2>
+    <p>Following these code quality guidelines will help our team: - Produce
+      more maintainable code - Reduce bugs and technical debt - Improve
+      collaboration and code reviews - Deliver better products faster</p>
+    <p>Remember: These are guidelines, not rigid rules. Use your judgment
+      and discuss with the team when you need to deviate from these
+      standards.</p>
+    <hr />
+    <p><strong>Questions or Suggestions?</strong> If you have questions
+      about these guidelines or suggestions for improvements, please reach out
+      to us.</p>
+    <p><em>Last updated: June 3, 2025</em></p>
+  </div> <!-- content-wrapper -->
 </body>
 
 </html>
